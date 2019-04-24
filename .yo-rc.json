@@ -1,0 +1,35 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.philippthaler.blog"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "monolith",
+    "baseName": "studium",
+    "packageName": "com.philippthaler.blog",
+    "packageFolder": "com/philippthaler/blog",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NDU2OWUxMDc5MWU3YmVkYzEwZjAzODc4ODcwMmM5MTQwOWY5NTE5MDViODBiNmJhMzk5OGRjNDAwYzc0YjUxMDA3NDUzOWExM2FiNDI3MGIwOTgxNDc3NmRkNzhhOGVjNGQwMGYxNmU4NTA5ZDYzYTQwYTIxNTY1OWEzMDZiMDI=",
+    "clientFramework": "react",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
