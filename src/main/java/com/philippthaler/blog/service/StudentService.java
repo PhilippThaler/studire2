@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class StudentService {
+
+    private static int count = 0;
 
     private final Logger log = LoggerFactory.getLogger(StudentService.class);
 
@@ -33,6 +36,7 @@ public class StudentService {
      * @return the persisted entity
      */
     public Student save(Student student) {
+        student.setMatrikelNr(generateMatrikelNr());
         log.debug("Request to save Student : {}", student);
         return studentRepository.save(student);
     }
@@ -69,5 +73,12 @@ public class StudentService {
     public void delete(Long id) {
         log.debug("Request to delete Student : {}", id);
         studentRepository.deleteById(id);
+    }
+
+    private Long generateMatrikelNr() {
+        final int uniNr = 30;
+        String year = (LocalDate.now().getYear() + "").substring(2);
+        Long number = Long.valueOf(year + "" + uniNr + count++);
+        return number;
     }
 }
