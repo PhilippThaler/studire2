@@ -4,13 +4,6 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "matrikelNr",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "firstName",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -44,6 +37,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "matrikelNr",
+            "fieldType": "Long"
         }
     ],
     "changelogDate": "20190424133326",

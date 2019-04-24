@@ -35,12 +35,12 @@ export class Student extends React.Component<IStudentProps> {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Matrikel Nr</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Street</th>
                 <th>Zip Code</th>
                 <th>City</th>
+                <th>Matrikel Nr</th>
                 <th />
               </tr>
             </thead>
@@ -52,12 +52,12 @@ export class Student extends React.Component<IStudentProps> {
                       {student.id}
                     </Button>
                   </td>
-                  <td>{student.matrikelNr}</td>
                   <td>{student.firstName}</td>
                   <td>{student.lastName}</td>
                   <td>{student.street}</td>
                   <td>{student.zipCode}</td>
                   <td>{student.city}</td>
+                  <td>{student.matrikelNr}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${student.id}`} color="info" size="sm">

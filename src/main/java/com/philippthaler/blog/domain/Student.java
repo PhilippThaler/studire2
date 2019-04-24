@@ -25,10 +25,6 @@ public class Student implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "matrikel_nr", nullable = false)
-    private Long matrikelNr;
-
-    @NotNull
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -48,6 +44,9 @@ public class Student implements Serializable {
     @Column(name = "city", nullable = false)
     private String city;
 
+    @Column(name = "matrikel_nr")
+    private Long matrikelNr;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -55,19 +54,6 @@ public class Student implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getMatrikelNr() {
-        return matrikelNr;
-    }
-
-    public Student matrikelNr(Long matrikelNr) {
-        this.matrikelNr = matrikelNr;
-        return this;
-    }
-
-    public void setMatrikelNr(Long matrikelNr) {
-        this.matrikelNr = matrikelNr;
     }
 
     public String getFirstName() {
@@ -134,6 +120,19 @@ public class Student implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public Long getMatrikelNr() {
+        return matrikelNr;
+    }
+
+    public Student matrikelNr(Long matrikelNr) {
+        this.matrikelNr = matrikelNr;
+        return this;
+    }
+
+    public void setMatrikelNr(Long matrikelNr) {
+        this.matrikelNr = matrikelNr;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -160,12 +159,12 @@ public class Student implements Serializable {
     public String toString() {
         return "Student{" +
             "id=" + getId() +
-            ", matrikelNr=" + getMatrikelNr() +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", street='" + getStreet() + "'" +
             ", zipCode=" + getZipCode() +
             ", city='" + getCity() + "'" +
+            ", matrikelNr=" + getMatrikelNr() +
             "}";
     }
 }

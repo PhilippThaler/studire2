@@ -41,9 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = StudiumApp.class)
 public class StudentResourceIntTest {
 
-    private static final Long DEFAULT_MATRIKEL_NR = 1L;
-    private static final Long UPDATED_MATRIKEL_NR = 2L;
-
     private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
 
@@ -58,6 +55,9 @@ public class StudentResourceIntTest {
 
     private static final String DEFAULT_CITY = "AAAAAAAAAA";
     private static final String UPDATED_CITY = "BBBBBBBBBB";
+
+    private static final Long DEFAULT_MATRIKEL_NR = 1L;
+    private static final Long UPDATED_MATRIKEL_NR = 2L;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -104,12 +104,12 @@ public class StudentResourceIntTest {
      */
     public static Student createEntity(EntityManager em) {
         Student student = new Student()
-            .matrikelNr(DEFAULT_MATRIKEL_NR)
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .street(DEFAULT_STREET)
             .zipCode(DEFAULT_ZIP_CODE)
-            .city(DEFAULT_CITY);
+            .city(DEFAULT_CITY)
+            .matrikelNr(DEFAULT_MATRIKEL_NR);
         return student;
     }
 
@@ -133,12 +133,12 @@ public class StudentResourceIntTest {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeCreate + 1);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getMatrikelNr()).isEqualTo(DEFAULT_MATRIKEL_NR);
         assertThat(testStudent.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testStudent.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testStudent.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testStudent.getZipCode()).isEqualTo(DEFAULT_ZIP_CODE);
         assertThat(testStudent.getCity()).isEqualTo(DEFAULT_CITY);
+        assertThat(testStudent.getMatrikelNr()).isEqualTo(DEFAULT_MATRIKEL_NR);
     }
 
     @Test
@@ -158,24 +158,6 @@ public class StudentResourceIntTest {
         // Validate the Student in the database
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkMatrikelNrIsRequired() throws Exception {
-        int databaseSizeBeforeTest = studentRepository.findAll().size();
-        // set the field null
-        student.setMatrikelNr(null);
-
-        // Create the Student, which fails.
-
-        restStudentMockMvc.perform(post("/api/students")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(student)))
-            .andExpect(status().isBadRequest());
-
-        List<Student> studentList = studentRepository.findAll();
-        assertThat(studentList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -279,12 +261,12 @@ public class StudentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
-            .andExpect(jsonPath("$.[*].matrikelNr").value(hasItem(DEFAULT_MATRIKEL_NR.intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
             .andExpect(jsonPath("$.[*].zipCode").value(hasItem(DEFAULT_ZIP_CODE)))
-            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())));
+            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
+            .andExpect(jsonPath("$.[*].matrikelNr").value(hasItem(DEFAULT_MATRIKEL_NR.intValue())));
     }
     
     @Test
@@ -298,12 +280,12 @@ public class StudentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(student.getId().intValue()))
-            .andExpect(jsonPath("$.matrikelNr").value(DEFAULT_MATRIKEL_NR.intValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
             .andExpect(jsonPath("$.zipCode").value(DEFAULT_ZIP_CODE))
-            .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()));
+            .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
+            .andExpect(jsonPath("$.matrikelNr").value(DEFAULT_MATRIKEL_NR.intValue()));
     }
 
     @Test
@@ -327,12 +309,12 @@ public class StudentResourceIntTest {
         // Disconnect from session so that the updates on updatedStudent are not directly saved in db
         em.detach(updatedStudent);
         updatedStudent
-            .matrikelNr(UPDATED_MATRIKEL_NR)
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .street(UPDATED_STREET)
             .zipCode(UPDATED_ZIP_CODE)
-            .city(UPDATED_CITY);
+            .city(UPDATED_CITY)
+            .matrikelNr(UPDATED_MATRIKEL_NR);
 
         restStudentMockMvc.perform(put("/api/students")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -343,12 +325,12 @@ public class StudentResourceIntTest {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeUpdate);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getMatrikelNr()).isEqualTo(UPDATED_MATRIKEL_NR);
         assertThat(testStudent.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testStudent.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testStudent.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testStudent.getZipCode()).isEqualTo(UPDATED_ZIP_CODE);
         assertThat(testStudent.getCity()).isEqualTo(UPDATED_CITY);
+        assertThat(testStudent.getMatrikelNr()).isEqualTo(UPDATED_MATRIKEL_NR);
     }
 
     @Test

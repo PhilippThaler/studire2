@@ -29,10 +29,6 @@ export class StudentDetail extends React.Component<IStudentDetailProps> {
           </h2>
           <dl className="jh-entity-details">
             <dt>
-              <span id="matrikelNr">Matrikel Nr</span>
-            </dt>
-            <dd>{studentEntity.matrikelNr}</dd>
-            <dt>
               <span id="firstName">First Name</span>
             </dt>
             <dd>{studentEntity.firstName}</dd>
@@ -52,6 +48,10 @@ export class StudentDetail extends React.Component<IStudentDetailProps> {
               <span id="city">City</span>
             </dt>
             <dd>{studentEntity.city}</dd>
+            <dt>
+              <span id="matrikelNr">Matrikel Nr</span>
+            </dt>
+            <dd>{studentEntity.matrikelNr}</dd>
           </dl>
           <Button tag={Link} to="/entity/student" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

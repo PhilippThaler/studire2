@@ -86,21 +86,6 @@ export class StudentUpdate extends React.Component<IStudentUpdateProps, IStudent
                   </AvGroup>
                 ) : null}
                 <AvGroup>
-                  <Label id="matrikelNrLabel" for="matrikelNr">
-                    Matrikel Nr
-                  </Label>
-                  <AvField
-                    id="student-matrikelNr"
-                    type="string"
-                    className="form-control"
-                    name="matrikelNr"
-                    validate={{
-                      required: { value: true, errorMessage: 'This field is required.' },
-                      number: { value: true, errorMessage: 'This field should be a number.' }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
                   <Label id="firstNameLabel" for="firstName">
                     First Name
                   </Label>
