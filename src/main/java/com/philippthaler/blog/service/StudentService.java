@@ -78,7 +78,7 @@ public class StudentService {
     private Long generateMatrikelNr() {
         final int uniNr = 30;
         String year = (LocalDate.now().getYear() + "").substring(2);
-        Long number = Long.valueOf(year + "" + uniNr + count++);
+        Long number = Long.valueOf(year + "" + uniNr + String.format("%03d", count++));
         return number;
     }
 }
